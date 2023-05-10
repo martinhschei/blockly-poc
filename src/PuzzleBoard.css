@@ -1,0 +1,75 @@
+.puzzle-board {
+    background-color: #8f8f8f;
+    display: flex;
+    height: 100vh;
+    width: 2000px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.puzzle-piece {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    height: 50px;
+    border: 2px solid #000;
+    position: relative;
+}
+
+.l {
+    height: 100px;
+    clip-path: polygon(100% 100%, 0% 99%, 0% 0%, 100% 0%, 100% 22%, 27% 22%, 26% 80%, 100% 79%);
+}
+
+.connector {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}
+
+.input.north {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.output.south {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+.input.east,
+.output.east {
+  right: 0;
+  top: 50%;
+  transform: translate(50%, -50%);
+}
+
+.input.west,
+.output.west {
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.output.east::before,
+.output.west::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #ccc;
+  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+}
+
+.input.east::before,
+.input.west::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #ccc;
+  clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
+  transform: scaleX(-1);
+}  
