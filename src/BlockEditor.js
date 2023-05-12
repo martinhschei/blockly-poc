@@ -4,40 +4,14 @@ import React, { useEffect } from 'react';
 import { ZoomToFitControl } from '@blockly/zoom-to-fit';
 
 const BlockEditor = (props) => {
-  const blocks = [
-    {
-      name: 'phase_t1_t2',
-    },
-    {
-      name: 'phase_t1_iterator',
-    },
-    {
-      name: 'phase_t1_iterator_interval',
-    },
-    {
-      name: 'ensemble',
-    },
-    {
-      name: 'delay',
-    },
-    {
-      name: 'ping_simultaneously_group',
-    },
-    {
-      name: 'ping_configuration_attributes',
-    },
-    {
-      name: 'ping_configuration',
-    },
-  ];
-
+  
   useEffect(() => {
     const workspace = Blockly.inject('blocklyDiv', {
       grid: {
-        spacing: 20,
         length: 3,
-        colour: '#e8e8e8',
+        spacing: 20,
         snap: true,
+        colour: '#c8c8c8',
       },
       zoom: {
         controls: true,
@@ -47,7 +21,7 @@ const BlockEditor = (props) => {
 
     const zoomToFit = new ZoomToFitControl(workspace);
     zoomToFit.init();
-
+    
     const pc = workspace.newBlock('ping_configuration');
     pc.initSvg();
     pc.render();
