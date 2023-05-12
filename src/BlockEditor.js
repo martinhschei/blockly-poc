@@ -1,59 +1,43 @@
 import Blockly from 'blockly';
-import React, { Component } from 'react';
 import './CustomBlocks.js';
-import {ZoomToFitControl} from '@blockly/zoom-to-fit';
+import React, { useEffect } from 'react';
+import { ZoomToFitControl } from '@blockly/zoom-to-fit';
 
-class BlockEditor extends Component {
+const BlockEditor = (props) => {
+  const blocks = [
+    {
+      name: 'phase_t1_t2',
+    },
+    {
+      name: 'phase_t1_iterator',
+    },
+    {
+      name: 'phase_t1_iterator_interval',
+    },
+    {
+      name: 'ensemble',
+    },
+    {
+      name: 'delay',
+    },
+    {
+      name: 'ping_simultaneously_group',
+    },
+    {
+      name: 'ping_configuration_attributes',
+    },
+    {
+      name: 'ping_configuration',
+    },
+  ];
 
-  hasRun = false;
-
-  componentDidMount() {
-    const toolbox = {
-      "kind": "flyoutToolbox",
-      "scrollbar": true,
-      "contents": [
-        {
-          "kind" : "block",
-          "type" : "phase_t1_t2",
-        },
-        {
-          "kind" : "block",
-          "type" : "phase_t1_iterator"
-        },
-        {
-          "kind" : "block",
-          "type" : "phase_t1_iterator_interval",
-        },
-        {
-          "kind" : "block",
-          "type" : "ensemble",
-        },
-        {
-          "kind" : "block",
-          "type" : "delay",
-        },
-        {
-          "kind" : "block",
-          "type" : "ping_simultaneously_group"
-        },
-        {
-          "kind" : "block",
-          "type" : "ping_configuration_attributes"
-        },
-        {
-          "kind" : "block",
-          "type" : "ping_configuration",
-        }
-      ]
-    };
-    
-    this.workspace = Blockly.inject('blocklyDiv', {
-      // toolbox: toolbox,
+  useEffect(() => {
+    const workspace = Blockly.inject('blocklyDiv', {
       grid: {
         spacing: 20,
         length: 3,
         colour: '#e8e8e8',
-        snap: true
+        snap: true,
       },
       zoom: {
         controls: true,
@@ -61,30 +45,29 @@ class BlockEditor extends Component {
       scrollbars: true,
     });
 
-    const zoomToFit = new ZoomToFitControl(this.workspace);
+    const zoomToFit = new ZoomToFitControl(workspace);
     zoomToFit.init();
 
-    var blockName = "ping_configuration" // Name of block to add
+    const pc = workspace.newBlock('ping_configuration');
+    pc.initSvg();
+    pc.render();
+    pc.moveBy(50, 10);
 
-    var newBlock = this.workspace.newBlock(blockName);
-    newBlock.initSvg();
-    newBlock.render();
-    newBlock.moveBy(50,10);
-    this.workspace.cleanUp();
+    const pca = workspace.newBlock('ping_configuration_attributes');
+    pca.initSvg();
+    pca.render();
+    pca.moveBy(50, 10);
 
-  }
+    return () => {
+      workspace.dispose();
+    };
+  }, []);
 
-  componentWillUnmount() {
-    this.workspace.dispose();
-  }
-
-  render() {
-    return (
-      <div>
-        <div id="blocklyDiv"></div>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <div id="blocklyDiv"></div>
+    </div>
+  );
+};
 
 export default BlockEditor;

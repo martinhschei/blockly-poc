@@ -1,4 +1,3 @@
-
 import './App.css';
 import './BlocklyCustoms.css';
 import Timeline from './Timeline.js';
@@ -12,7 +11,6 @@ function App() {
         Duo Mission Planner by Kongsberg Discovery
       </div>
       <div class="container">
-        
         <div class="row row-1">
           <div class="column-1">
             <BlocklyToolBox />
@@ -21,14 +19,6 @@ function App() {
             <BlockEditor />
           </div>
 
-        </div>
-
-        <div class="row row-2">
-            <Timeline />
-        </div>
-
-        <div class="row row-3">
-          <Timeline />
         </div>
       </div>
     </div>
